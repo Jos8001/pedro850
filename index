@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pedro 850 – Bordhandbuch & Galerie</title>
+  <meta name="description" content="Infos, Bilder und Videos rund um meine Pedro 850." />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#121b2f;
+      --muted:#a9b4d0;
+      --text:#eef2ff;
+      --accent:#5eead4;
+      --accent2:#60a5fa;
+      --border:rgba(255,255,255,.10);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+      --max: 1050px;
+      --pad: 18px;
+      --pad2: 26px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--font);
+      background:
+        radial-gradient(900px 500px at 20% 0%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(900px 500px at 90% 20%, rgba(94,234,212,.14), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding: 34px 18px 60px;}
+    header{
+      display:flex; gap:18px; align-items:flex-start; justify-content:space-between;
+      padding: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .title h1{margin:0 0 6px; font-size: clamp(26px, 4vw, 40px);}
+    .title p{margin:0; color:var(--muted); max-width: 70ch;}
+    .pillbar{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .pill{
+      font-size:13px;
+      padding: 6px 10px;
+      border:1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      user-select:none;
+      white-space:nowrap;
+    }
+
+    nav{
+      position: sticky;
+      top: 10px;
+      margin-top: 18px;
+      z-index: 5;
+      backdrop-filter: blur(10px);
+    }
+    .nav-inner{
+      display:flex; gap:10px; flex-wrap:wrap;
+      padding: 12px 12px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: rgba(18,27,47,.65);
+      box-shadow: 0 12px 30px rgba(0,0,0,.22);
+    }
+    .nav-inner a{
+      text-decoration:none;
+      font-size: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border:1px solid transparent;
+      color: var(--muted);
+    }
+    .nav-inner a:hover{border-color: rgba(255,255,255,.14); color: var(--text);}
+    .nav-inner a.active{background: rgba(96,165,250,.14); color: var(--text); border-color: rgba(96,165,250,.35);}
+
+    main{margin-top: 18px; display:grid; gap:18px}
+    section.card{
+      border:1px solid var(--border);
+      background: rgba(18,27,47,.72);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card-h{
+      padding: 18px 22px;
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .card-h h2{margin:0; font-size: 18px}
+    .card-h .sub{margin:0; color: var(--muted); font-size: 13px}
+    .card-b{padding: 18px 22px;}
+
+    /* Info grid */
+    .grid{
+      display:grid;
+      gap:14px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .info{
+      grid-column: span 6;
+      padding: 16px;
+      border:1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255,255,255,.03);
+    }
+    .info h3{margin:0 0 6px; font-size:16px}
+    .info p{margin:0; color: var(--muted); font-size:14px}
+    .kv{margin-top:10px; display:grid; gap:8px}
+    .kv .row{
+      display:flex; gap:10px; justify-content:space-between;
+      padding: 8px 10px;
+      border:1px dashed rgba(255,255,255,.12);
+      border-radius: 12px;
+      background: rgba(0,0,0,.08);
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .kv b{color: var(--text); font-weight:600}
+
+    /* Carousel */
+    .carousel{
+      position:relative;
+      border:1px solid var(--border);
+      border-radius: 18px;
+      overflow:hidden;
+      background: rgba(0,0,0,.25);
+    }
+    .track{
+      display:flex;
+      transition: transform .35s ease;
+      will-change: transform;
+    }
+    .slide{
+      min-width: 100%;
+      position: relative;
+      aspect-ratio: 16/9;
+      background: rgba(255,255,255,.03);
+    }
+    .slide img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+    }
+    .caption{
+      position:absolute;
+      left: 12px; right: 12px; bottom: 12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(11,18,32,.55);
+      backdrop-filter: blur(10px);
+      color: var(--text);
+      font-size: 13px;
+    }
+    .controls{
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:space-between;
+      pointer-events:none;
+      padding: 0 10px;
+    }
+    .btn{
+      pointer-events:auto;
+      width: 42px; height: 42px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(18,27,47,.55);
+      color: var(--text);
+      display:grid; place-items:center;
+      cursor:pointer;
+      box-shadow: 0 10px 22px rgba(0,0,0,.25);
+    }
+    .btn:hover{border-color: rgba(94,234,212,.35)}
+    .dots{
+      display:flex; gap:8px; justify-content:center; margin-top: 12px;
+    }
+    .dot{
+      width: 10px; height:10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+      cursor:pointer;
+    }
+    .dot.active{background: rgba(94,234,212,.75); border-color: rgba(94,234,212,.85)}
+
+    /* Videos */
+    .video-grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .video{
+      grid-column: span 6;
+      border:1px solid var(--border);
+      border-radius: 18px;
+      overflow:hidden;
+      background: rgba(255,255,255,.03);
+    }
+    .video .frame{
+      aspect-ratio: 16/9;
+      width:100%;
+      background: rgba(0,0,0,.25);
+    }
+    iframe{width:100%; height:100%; border:0; display:block}
+    .video .meta{padding: 12px 14px; color: var(--muted); font-size: 13px;}
+    .video .meta b{color: var(--text)}
+
+    footer{
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align:center;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px){
+      header{flex-direction:column}
+      .info{grid-column: span 12}
+      .video{grid-column: span 12}
+      nav{position:static}
+      .nav-inner{border-radius: 18px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header id="top">
+      <div class="title">
+        <h1>Pedro 850</h1>
+        <p>Meine kleine Bordseite: Technik-Infos, Checklisten, Bilder & Video-Ausschnitte. Alles als statische Seite auf GitHub Pages.</p>
+        <div class="pillbar">
+          <span class="pill">Bordhandbuch</span>
+          <span class="pill">Galerie</span>
+          <span class="pill">Videos</span>
+          <span class="pill">Single-File</span>
+        </div>
+      </div>
+
+      <div style="min-width:240px">
+        <div class="pill" style="display:inline-block;margin-bottom:10px;border-color:rgba(96,165,250,.35);color:var(--text);background:rgba(96,165,250,.10)">
+          💡 Tipp: Bilder in /assets/
+        </div>
+        <div class="pill" style="display:block">
+          Letztes Update: <span id="lastUpdate">–</span>
+        </div>
+      </div>
+    </header>
+
+    <nav>
+      <div class="nav-inner" id="nav">
+        <a href="#technik">Technik</a>
+        <a href="#checklisten">Checklisten</a>
+        <a href="#bilder">Bilder</a>
+        <a href="#videos">Videos</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+    </nav>
+
+    <main>
+
+      <!-- TECHNIK -->
+      <section class="card" id="technik">
+        <div class="card-h">
+          <div>
+            <h2>Technik</h2>
+            <p class="sub">Kurze Übersicht + Platz für deine echten Daten</p>
+          </div>
+        </div>
+
+        <div class="card-b">
+          <div class="grid">
+
+            <article class="info">
+              <h3>Heizung</h3>
+              <p>Beschreibe hier Typ/Bedienung, Wartung, Sicherungen, typische Fehler.</p>
+              <div class="kv">
+                <div class="row"><span>Typ</span><b>z.B. Webasto / Eberspächer</b></div>
+                <div class="row"><span>Dieselentnahme</span><b>z.B. Haupttank / Separat</b></div>
+                <div class="row"><span>Sicherung</span><b>z.B. 15A, Panel links</b></div>
+              </div>
+            </article>
+
+            <article class="info">
+              <h3>Wassertank</h3>
+              <p>Füllstand, Befüllung, Entleerung, Frostschutz, Filter.</p>
+              <div class="kv">
+                <div class="row"><span>Volumen</span><b>z.B. 200 L</b></div>
+                <div class="row"><span>Befüllung</span><b>z.B. Deck an Steuerbord</b></div>
+                <div class="row"><span>Pumpe</span><b>z.B. Druckpumpe 12V</b></div>
+              </div>
+            </article>
+
+            <article class="info">
+              <h3>WC / Fäkalientank</h3>
+              <p>Bedienung, Spülung, Seeventile, Tankentleerung (Deck/Sea).</p>
+              <div class="kv">
+                <div class="row"><span>System</span><b>z.B. elektrisch / manuell</b></div>
+                <div class="row"><span>Entleerung</span><b>z.B. Deckabsaugung</b></div>
+                <div class="row"><span>Wichtig</span><b>Seeventile prüfen</b></div>
+              </div>
+            </article>
+
+            <article class="info">
+              <h3>Elektrik</h3>
+              <p>Batterien, Ladegerät, Landstrom, Sicherungspanel, Verbraucher.</p>
+              <div class="kv">
+                <div class="row"><span>Batteriebank</span><b>z.B. 2× AGM 100Ah</b></div>
+                <div class="row"><span>Landstrom</span><b>z.B. 230V, FI/LS</b></div>
+                <div class="row"><span>Laden</span><b>z.B. Solar / Lichtmaschine</b></div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- CHECKLISTEN -->
+      <section class="card" id="checklisten">
+        <div class="card-h">
+          <div>
+            <h2>Checklisten</h2>
+            <p class="sub">Praktisch für Saisonstart / Ablegen / Winter</p>
+          </div>
+        </div>
+
+        <div class="card-b">
+          <div class="grid">
+            <article class="info">
+              <h3>Ablegen</h3>
+              <p>
+                ✅ Fender/Leinen<br/>
+                ✅ Seeventile/Filter<br/>
+                ✅ Batterie / Hauptschalter<br/>
+                ✅ Motorcheck (Öl/Kühlwasser)<br/>
+                ✅ Karten/Route/Wetter
+              </p>
+            </article>
+            <article class="info">
+              <h3>Winter</h3>
+              <p>
+                ✅ Wasseranlage entleeren<br/>
+                ✅ Frostschutz (falls nötig)<br/>
+                ✅ Batterien pflegen/abklemmen<br/>
+                ✅ Plane / Lüften<br/>
+                ✅ Inventarliste
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- BILDER -->
+      <section class="card" id="bilder">
+        <div class="card-h">
+          <div>
+            <h2>Bilder</h2>
+            <p class="sub">Karussell – ersetze die Dateinamen durch deine Fotos</p>
+          </div>
+        </div>
+
+        <div class="card-b">
+          <div class="carousel" aria-label="Bilderkarussell">
+            <div class="track" id="track">
+              <!-- Wichtig: Lege Bilder in /assets/ ab und passe die Dateinamen an -->
+              <div class="slide">
+                <img src="assets/pedro-01.jpg" alt="Pedro 850 – Außenansicht" loading="lazy">
+                <div class="caption">Außenansicht / Hafen</div>
+              </div>
+              <div class="slide">
+                <img src="assets/pedro-02.jpg" alt="Pedro 850 – Cockpit" loading="lazy">
+                <div class="caption">Cockpit</div>
+              </div>
+              <div class="slide">
+                <img src="assets/pedro-03.jpg" alt="Pedro 850 – Salon" loading="lazy">
+                <div class="caption">Salon / Innenraum</div>
+              </div>
+            </div>
+
+            <div class="controls">
+              <button class="btn" id="prev" aria-label="Vorheriges Bild">‹</button>
+              <button class="btn" id="next" aria-label="Nächstes Bild">›</button>
+            </div>
+          </div>
+
+          <div class="dots" id="dots" aria-label="Karussell Navigation"></div>
+
+          <p style="margin:14px 0 0; color:var(--muted); font-size:13px">
+            Tipp: Wenn du willst, kann das Karussell auch automatisch alle X Sekunden wechseln (siehe JS unten).
+          </p>
+        </div>
+      </section>
+
+      <!-- VIDEOS -->
+      <section class="card" id="videos">
+        <div class="card-h">
+          <div>
+            <h2>Videos</h2>
+            <p class="sub">YouTube/Vimeo einbetten oder lokale MP4s nutzen</p>
+          </div>
+        </div>
+
+        <div class="card-b">
+          <div class="video-grid">
+
+            <!-- Beispiel: YouTube Embed (ID ersetzen) -->
+            <div class="video">
+              <div class="frame">
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/VIDEO_ID_1"
+                  title="Pedro 850 – Video 1"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="meta"><b>Ausfahrt</b> – kurzer Clip vom See</div>
+            </div>
+
+            <!-- Beispiel: Lokales MP4 (Datei in assets/ legen) -->
+            <div class="video">
+              <div class="frame">
+                <video controls preload="metadata" style="width:100%;height:100%;display:block;background:rgba(0,0,0,.25)">
+                  <source src="assets/clip-01.mp4" type="video/mp4">
+                  Dein Browser unterstützt das Video-Tag nicht.
+                </video>
+              </div>
+              <div class="meta"><b>Manöver</b> – Clip als lokale MP4</div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- KONTAKT -->
+      <section class="card" id="kontakt">
+        <div class="card-h">
+          <div>
+            <h2>Kontakt</h2>
+            <p class="sub">Optional – z.B. für Mitfahrer oder Marina-Kontakt</p>
+          </div>
+        </div>
+        <div class="card-b">
+          <p style="margin:0;color:var(--muted)">
+            ✉️ <span style="color:var(--text)">dein.name@example.com</span><br/>
+            📍 Heimathafen: <span style="color:var(--text)">…</span>
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      © <span id="year"></span> Pedro 850 • Erstellt mit HTML/CSS/JS auf GitHub Pages
+    </footer>
+  </div>
+
+  <script>
+    // --- Footer dates ---
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("lastUpdate").textContent = new Date().toLocaleDateString("de-CH", {
+      year:"numeric", month:"2-digit", day:"2-digit"
+    });
+
+    // --- Simple carousel ---
+    const track = document.getElementById("track");
+    const slides = Array.from(track.children);
+    const dotsWrap = document.getElementById("dots");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+
+    let index = 0;
+
+    function renderDots(){
+      dotsWrap.innerHTML = "";
+      slides.forEach((_, i) => {
+        const d = document.createElement("button");
+        d.className = "dot" + (i === index ? " active" : "");
+        d.setAttribute("aria-label", "Bild " + (i+1));
+        d.addEventListener("click", () => goTo(i));
+        dotsWrap.appendChild(d);
+      });
+    }
+
+    function goTo(i){
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(${-index * 100}%)`;
+      renderDots();
+    }
+
+    prevBtn.addEventListener("click", () => goTo(index - 1));
+    nextBtn.addEventListener("click", () => goTo(index + 1));
+
+    // Optional: Auto-Play (auskommentieren zum Aktivieren)
+    // const AUTO_MS = 6000;
+    // setInterval(() => goTo(index + 1), AUTO_MS);
+
+    renderDots();
+    goTo(0);
+
+    // --- Active nav link on scroll ---
+    const navLinks = Array.from(document.querySelectorAll("#nav a"));
+    const sections = navLinks.map(a => document.querySelector(a.getAttribute("href")));
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          navLinks.forEach(a => a.classList.remove("active"));
+          const active = navLinks.find(a => a.getAttribute("href") === "#" + e.target.id);
+          if(active) active.classList.add("active");
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0.01 });
+
+    sections.forEach(s => s && obs.observe(s));
+  </script>
+</body>
+</html>
