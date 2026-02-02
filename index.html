@@ -79,41 +79,45 @@
     }
 
     /* Carousel */
-    .carousel {
+    .carousel { }
+
+    .viewport{
       position: relative;
       overflow: hidden;
       border-radius: 16px;
     }
 
-    .track {
-      display: flex;
+    .track{
+      display:flex;
       transition: transform .4s ease;
     }
 
-    .slide {
-      min-width: 100%;
-      aspect-ratio: 16/9;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .slide{
+      min-width:100%;
+      aspect-ratio: 16/9;      /* Bildbereich bleibt 16:9 */
+      background: rgba(0,0,0,.15);
     }
 
-    .slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .slide img{
+      width:100%;
+      height:100%;
+      object-fit: contain;     /* <- WICHTIG: schneidet NICHT ab */
+      display:block;
     }
 
-    .controls {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 10px;
+    /* Controls sollen nur Buttons klickbar machen, nicht alles blockieren */
+    .controls{
+      position:absolute;
+      inset:0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0 10px;
+      pointer-events:none;     /* <- WICHTIG */
     }
 
-    .btn {
+    .btn{
+      pointer-events:auto;     /* <- Buttons bleiben klickbar */
       background: rgba(0,0,0,.5);
       border: 1px solid var(--border);
       color: white;
@@ -152,6 +156,14 @@
       font-weight: 500;
     }
 
+    .img-caption{
+      margin-top: 10px;
+      text-align: center;
+      font-size: 15px;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
     .title-row{
       display:flex;
       align-items:center;
@@ -178,22 +190,28 @@
       display:flex;
       justify-content:center;
       gap:10px;
-      margin-top:14px;
+      margin-top:12px;
+      flex-wrap: wrap; /* bei vielen Bildern bricht es schön um */
     }
 
     .dot{
-      width:10px;
-      height:10px;
+      width:12px;
+      height:12px;
       border-radius:50%;
       background: rgba(255,255,255,.35);
       cursor:pointer;
       transition: transform .2s ease, background .2s ease;
+
+      /* mehr Touch-Fläche, ohne dass der Punkt optisch größer wird */
+      padding: 10px;
+      background-clip: content-box;
     }
 
     .dot.active{
       background: white;
-      transform: scale(1.3);
+      transform: scale(1.2);
     }
+
 
   </style>
 </head>
@@ -279,110 +297,98 @@
     <div class="carousel">
       <div class="track" id="track">
         
-        <div class="slide">
+        <div class="slide" data-caption="Hafenanlage">
           <img src="assets/pedro-01.jpg" alt="Hafenanlage">
-          <div class="caption">Hafenanlage</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Am Bürkliplatz">
           <img src="assets/pedro-02.jpg" alt="Am Bürkliplatz">
-          <div class="caption">Am Bürkliplatz</div>
         </div>
         
-        <div class="slide">
-          <img src="assets/pedro-03.jpg" alt="Vor Anker im Zürichhorn">
-          <div class="caption">Vor Anker im Zürichhorn</div>
+        <div class="slide" data-caption="Vor Anker am Zürihorn">
+          <img src="assets/pedro-03.jpg" alt="Vor Anker im Zürihorn">
         </div>  
         
-        <div class="slide">
+        <div class="slide" data-caption="Captain's View">
           <img src="assets/pedro-04.jpg" alt="Captain's View">
-          <div class="caption">Captain's View</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Blue Magic">
           <img src="assets/pedro-05.jpg" alt="Blue Magic">
-          <div class="caption">Blue Magic</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Sunrise Ufenau">
           <img src="assets/pedro-06.jpg" alt="Sunrise Ufenau">
-          <div class="caption">Sunrise Ufenau</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Sunrise Ufenau">
           <img src="assets/pedro-07.jpg" alt="Sunrise Ufenau">
-          <div class="caption">Sunrise Ufenau</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Sunrise Ufenau">
           <img src="assets/pedro-08.jpg" alt="Sunrise Ufenau">
-          <div class="caption">Sunrise Ufenau</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Relax">
           <img src="assets/pedro-09.jpg" alt="Relax">
-          <div class="caption">Relax</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Sunset Cruise">
           <img src="assets/pedro-10.jpg" alt="Sunset Cruise">
-          <div class="caption">Sunset Cruise</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Sunset Cruise">
           <img src="assets/pedro-11.jpg" alt="Sunset Cruise">
-          <div class="caption">Sunset Cruise</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Sunset Ufenau">
           <img src="assets/pedro-12.jpg" alt="Sunset Ufenau">
-          <div class="caption">Sunset Ufenau</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Kabine">
           <img src="assets/pedro-13.jpg" alt="Kabine">
-          <div class="caption">Kabine</div>
         </div>  
 
-        <div class="slide">
+        <div class="slide" data-caption="Bugkabine">
           <img src="assets/pedro-14.jpg" alt="Zur Bugkabine">
-          <div class="caption">Kabine</div>
         </div>  
 
-        <div class="slide">
+        <div class="slide" data-caption="WC Kabine">
           <img src="assets/pedro-15.jpg" alt="WC Kabine">
-          <div class="caption">WC Kabine</div>
         </div>  
         
-        <div class="slide">
+        <div class="slide" data-caption="Bootshalle">
           <img src="assets/pedro-16.jpg" alt="Bootshalle">
-          <div class="caption">Bootshalle</div>
         </div>  
         
-        <div class="slide">
+        <div class="slide" data-caption="Bootshalle mit automatischem Lift">
           <img src="assets/pedro-17.jpg" alt="Bootsplatz mit automatischem Lift">
-          <div class="caption">Bootsplatz mit automatischem Lift</div>
         </div>  
         
-        <div class="slide">
+        <div class="slide" data-caption="Boot absenken - einsteigen - losfahren">
           <img src="assets/pedro-18.jpg" alt="Boot absenken - einsteigen - losfahren">
-          <div class="caption">Boot absenken - einsteigen - losfahren</div>
         </div>  
         
-        <div class="slide">
+        <div class="slide" data-caption="Ausfahrt Bootshalle">
           <img src="assets/pedro-19.jpg" alt="Ausfahrt Bootshalle">
           <div class="caption">Ausfahrt Bootshalle</div>
         </div>  
         
       </div>
 
-      <div class="dots" id="dots"></div>
-
       <div class="controls">
-        <button class="btn" onclick="prev()">‹</button>
-        <button class="btn" onclick="next()">›</button>
+        <button class="btn" onclick="prev()" aria-label="Vorheriges Bild">‹</button>
+        <button class="btn" onclick="next()" aria-label="Nächstes Bild">›</button>
       </div>
     </div>
+
+    <!-- Text UNTER dem Bild -->
+    <div class="img-caption" id="imgCaption"></div>
+
+    <!-- Punkte UNTER dem Text -->
+    <div class="dots" id="dots"></div>
+
+  </div>
   </section>
 
   <!-- VIDEOS -->
