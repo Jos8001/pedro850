@@ -78,139 +78,108 @@
       background: rgba(255,255,255,.03);
     }
 
-    /* Carousel */
-    .carousel { }
+    /* --- CAROUSEL --- */
+.carousel{
+  width: 100%;
+}
 
-    .viewport{
-      position: relative;
-      overflow: hidden;
-      border-radius: 16px;
-    }
+/* Nur hier wird geclippt (damit links/rechts nichts sichtbar ist) */
+.viewport{
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+}
 
-    .track{
-      display:flex;
-      transition: transform .4s ease;
-    }
+/* Bildstrecke */
+.track{
+  display:flex;
+  transition: transform .4s ease;
+  will-change: transform;
+}
 
-    .slide{
-      min-width:100%;
-      aspect-ratio: 16/9;      /* Bildbereich bleibt 16:9 */
-      background: rgba(0,0,0,.15);
-    }
+.slide{
+  min-width: 100%;
+  aspect-ratio: 16/9;
+  background: rgba(0,0,0,.15);
+}
 
-    .slide img{
-      width:100%;
-      height:100%;
-      object-fit: contain;     /* <- WICHTIG: schneidet NICHT ab */
-      display:block;
-    }
+/* Standard: füllend (kein "schmaler Streifen" bei Hochformat) */
+.slide img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+}
 
-    /* Controls sollen nur Buttons klickbar machen, nicht alles blockieren */
-    .controls{
-      position:absolute;
-      inset:0;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:0 10px;
-      pointer-events:none;     /* <- WICHTIG */
-    }
+/* Pfeile über dem Bild */
+.controls{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 0 10px;
+  z-index: 5;
 
-    .btn{
-      pointer-events:auto;     /* <- Buttons bleiben klickbar */
-      background: rgba(0,0,0,.5);
-      border: 1px solid var(--border);
-      color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
+  /* wichtig: overlay blockt nicht die Dots (Dots sind eh außerhalb),
+     aber blockt auch nicht unnötig Klicks im Bild */
+  pointer-events: none;
+}
 
-    video, iframe {
-      width: 100%;
-      aspect-ratio: 16/9;
-      border-radius: 12px;
-      background: black;
-    }
+.btn{
+  pointer-events: auto;
+  background: rgba(0,0,0,.45);
+  border: 1px solid var(--border);
+  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+}
 
-    .video-caption {
-      text-align: center;
-      margin-top: 10px;
-      color: #ddd;
-      font-size: 15px;
-    }
+/* Text unter dem Bild (immer sichtbar, iPhone-safe) */
+.img-caption{
+  margin-top: 10px;
+  text-align: center;
+  font-size: 15px;
+  color: #fff;
+  font-weight: 500;
+}
 
-    footer {
-      text-align: center;
-      color: var(--muted);
-      padding: 20px;
-      font-size: 14px;
-    }
+/* Dots: große Touch-Fläche, leicht klickbar */
+.dots{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
 
-    .caption {
-      margin-top: 10px;
-      text-align: center;
-      font-size: 15px;
-      color: #ffffff;
-      font-weight: 500;
-    }
+.dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.35);
+  cursor: pointer;
 
-    .img-caption{
-      margin-top: 10px;
-      text-align: center;
-      font-size: 15px;
-      color: #ffffff;
-      font-weight: 500;
-    }
+  /* größere Klickfläche fürs iPhone */
+  padding: 10px;
+  background-clip: content-box;
+}
 
-    .title-row{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:14px;
-    }
+.dot.active{
+  background: #fff;
+  transform: scale(1.2);
+}
 
-    .title-logo{
-      width:56px;
-      height:56px;
-      object-fit:contain;
-      filter: drop-shadow(0 6px 14px rgba(0,0,0,.35));
-    }
+/* Optional: auf Mobile lieber "contain", damit nix abgeschnitten wird */
+@media (max-width: 520px){
+  .slide img{
+    object-fit: contain;
+    background: rgba(0,0,0,.15);
+  }
+}
 
-    /* iPhone / kleine Screens: Logos etwas kleiner */
-    @media (max-width: 480px){
-      .title-logo{
-        width:44px;
-        height:44px;
-      }
-    }
-
-    .dots{
-      display:flex;
-      justify-content:center;
-      gap:10px;
-      margin-top:12px;
-      flex-wrap: wrap; /* bei vielen Bildern bricht es schön um */
-    }
-
-    .dot{
-      width:12px;
-      height:12px;
-      border-radius:50%;
-      background: rgba(255,255,255,.35);
-      cursor:pointer;
-      transition: transform .2s ease, background .2s ease;
-
-      /* mehr Touch-Fläche, ohne dass der Punkt optisch größer wird */
-      padding: 10px;
-      background-clip: content-box;
-    }
-
-    .dot.active{
-      background: white;
-      transform: scale(1.2);
-    }
 
 
   </style>
@@ -371,7 +340,6 @@
         
         <div class="slide" data-caption="Ausfahrt Bootshalle">
           <img src="assets/pedro-19.jpg" alt="Ausfahrt Bootshalle">
-          <div class="caption">Ausfahrt Bootshalle</div>
         </div>  
         
       </div>
@@ -435,23 +403,52 @@
   const track = document.getElementById("track");
   const slides = track.querySelectorAll(".slide");
   const dotsWrap = document.getElementById("dots");
+  const captionEl = document.getElementById("imgCaption");
 
   let index = 0;
 
-  function show(){
-  track.style.transform = `translateX(${-index * 100}%)`;
-  updateDots();
-
-  // Caption unter dem Bild aktualisieren
-  const cap = slides[index].getAttribute("data-caption") || slides[index].querySelector("img")?.alt || "";
-  document.getElementById("imgCaption").textContent = cap;
+  function setCaption(){
+    const cap = slides[index].getAttribute("data-caption")
+      || slides[index].querySelector("img")?.alt
+      || "";
+    captionEl.textContent = cap;
   }
+
+  function updateDots(){
+    const dots = dotsWrap.querySelectorAll(".dot");
+    dots.forEach((d,i) => d.classList.toggle("active", i === index));
+  }
+
+  function show(){
+    track.style.transform = `translateX(${-index * 100}%)`;
+    setCaption();
+    updateDots();
+  }
+
+  function next(){
+    stopAuto();
+    index = (index + 1) % slides.length;
+    show();
+    startAuto();
+  }
+
+  function prev(){
+    stopAuto();
+    index = (index - 1 + slides.length) % slides.length;
+    show();
+    startAuto();
+  }
+
+  window.next = next;
+  window.prev = prev;
 
   function createDots(){
     dotsWrap.innerHTML = "";
     slides.forEach((_, i) => {
-      const d = document.createElement("div");
+      const d = document.createElement("button");
+      d.type = "button";
       d.className = "dot";
+      d.setAttribute("aria-label", `Bild ${i+1}`);
       d.addEventListener("click", () => {
         stopAuto();
         index = i;
@@ -462,13 +459,7 @@
     });
   }
 
-  function updateDots(){
-    const dots = dotsWrap.querySelectorAll(".dot");
-    dots.forEach((d,i) => d.classList.toggle("active", i === index));
-  }
-
-
-  /* ---------- AUTO SCROLL ---------- */
+  // Auto-Scroll
   const AUTO_MS = 4500;
   let timer = null;
 
@@ -485,17 +476,24 @@
     timer = null;
   }
 
-  const carousel = document.querySelector(".carousel");
-  carousel.addEventListener("mouseenter", stopAuto);
-  carousel.addEventListener("mouseleave", startAuto);
-  carousel.addEventListener("touchstart", stopAuto, {passive:true});
-  carousel.addEventListener("touchend", startAuto, {passive:true});
+  const viewport = document.querySelector(".viewport");
+  viewport.addEventListener("mouseenter", stopAuto);
+  viewport.addEventListener("mouseleave", startAuto);
+  viewport.addEventListener("touchstart", stopAuto, {passive:true});
+  viewport.addEventListener("touchend", startAuto, {passive:true});
+  viewport.addEventListener("touchcancel", startAuto, {passive:true});
 
-  /* ---------- INIT ---------- */
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stopAuto();
+    else startAuto();
+  });
+
+  // Init
   createDots();
   show();
   startAuto();
 </script>
+
 
 
 
