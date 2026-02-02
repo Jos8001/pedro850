@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Pedro 850 – Bordseite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #121b2f;
+      --text: #eef2ff;
+      --muted: #9aa6c7;
+      --accent: #5eead4;
+      --border: rgba(255,255,255,.12);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      padding: 32px 20px;
+      text-align: center;
+      background: linear-gradient(180deg,#14203c,#0b1220);
+    }
+
+    h1 { margin: 0 0 8px; }
+    h2 { margin-top: 0; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(11,18,32,.9);
+      padding: 10px;
+      text-align: center;
+      z-index: 10;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 14px;
+    }
+
+    nav a:hover { color: var(--text); }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 16px;
+    }
+
+    .box {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      background: rgba(255,255,255,.03);
+    }
+
+    /* Carousel */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .track {
+      display: flex;
+      transition: transform .4s ease;
+    }
+
+    .slide {
+      min-width: 100%;
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .controls {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px;
+    }
+
+    .btn {
+      background: rgba(0,0,0,.5);
+      border: 1px solid var(--border);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    video, iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 12px;
+      background: black;
+    }
+
+    .video-caption {
+      text-align: center;
+      margin-top: 10px;
+      color: #ddd;
+      font-size: 15px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    .caption {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 15px;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .title-row{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+    }
+
+    .title-logo{
+      width:56px;
+      height:56px;
+      object-fit:contain;
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,.35));
+    }
+
+    /* iPhone / kleine Screens: Logos etwas kleiner */
+    @media (max-width: 480px){
+      .title-logo{
+        width:44px;
+        height:44px;
+      }
+    }
+
+    .dots{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background: rgba(255,255,255,.35);
+      cursor:pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .dot.active{
+      background: white;
+      transform: scale(1.3);
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  
+  <div class="title-row">
+  <img class="title-logo" src="assets/pedro-logo.jpg" alt="Pedro Logo">
+  <h1>MS Romanza</h1>
+  <img class="title-logo" src="assets/pedro-logo.jpg" alt="Pedro Logo">
+</div>
+
+<p>Meine Bordseite – Technik, Bilder & Videos</p>
+
+</header>
+
+<nav>
+  <a href="#technik">Technik</a>
+  <a href="#bilder">Bilder</a>
+  <a href="#videos">Videos</a>
+</nav>
+
+<div class="container">
+
+  <!-- TECHNIK -->
+  <section id="technik">
+    <h2>Technik</h2>
+    <div class="grid">
+
+      <div class="box">
+        <h3>Masse</h3>
+        <p>9m lang, 3m breit<br>
+           Sicherung: 15A<br>
+           Zeile 3<br>
+           Bedienung über Panel</p>
+        
+      </div>
+      <div class="box">
+        <h3>Heizung</h3>
+        <p>Typ: Webasto / Diesel<br>
+           Sicherung: 15A<br>
+           Bedienung über Panel</p>
+      </div>
+
+      <div class="box">
+        <h3>Wassertank</h3>
+        <p>Volumen: ca. 200 L<br>
+           Befüllung: Deck<br>
+           Druckpumpe 12V</p>
+      </div>
+
+      <div class="box">
+        <h3>WC</h3>
+        <p>Fäkalientank<br>
+           Deckabsaugung<br>
+           Seeventil prüfen</p>
+      </div>
+
+      <div class="box">
+        <h3>Elektrik</h3>
+        <p>2× Bordbatterien<br>
+           Landstrom 230 V<br>
+           Ladegerät</p>
+      </div>
+
+      <div class="box">
+        <h3>Leer</h3>
+        <p>Zeile 1<br>
+           Zeile 2<br>
+           Zeile 3<br>
+           Zeile 4</p>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- BILDER - Pfeile rechts/links klicken-->
+  <section id="bilder">
+    <h2>Bilder</h2>
+
+    <div class="carousel">
+      <div class="track" id="track">
+        
+        <div class="slide">
+          <img src="assets/pedro-01.jpg" alt="Hafenanlage">
+          <div class="caption">Hafenanlage</div>
+        </div>
+        
+        <div class="slide">
+          <img src="assets/pedro-02.jpg" alt="Am Bürkliplatz">
+          <div class="caption">Am Bürkliplatz</div>
+        </div>
+        
+        <div class="slide">
+          <img src="assets/pedro-03.jpg" alt="Vor Anker im Zürichhorn">
+          <div class="caption">Vor Anker im Zürichhorn</div>
+        </div>  
+        
+        <div class="slide">
+          <img src="assets/pedro-04.jpg" alt="Captain's View">
+          <div class="caption">Captain's View</div>
+        </div>
+        
+        <div class="slide">
+          <img src="assets/pedro-05.jpg" alt="Blue Magic">
+          <div class="caption">Blue Magic</div>
+        </div>
+        
+        <div class="slide">
+          <img src="assets/pedro-06.jpg" alt="Sunrise Ufenau">
+          <div class="caption">Sunrise Ufenau</div>
+        </div>
+        
+        <div class="slide">
+          <img src="assets/pedro-07.jpg" alt="Sunrise Ufenau">
+          <div class="caption">Sunrise Ufenau</div>
+        </div>
+        
+        <div class="slide">
+          <img src="assets/pedro-08.jpg" alt="Sunrise Ufenau">
+          <div class="caption">Sunrise Ufenau</div>
+        </div>
+        
+        <div class="slide">
+          <img src="assets/pedro-09.jpg" alt="Relax">
+          <div class="caption">Relax</div>
+        </div>
+        
+        <div class="slide">
+          <img src="assets/pedro-10.jpg" alt="Sunset Cruise">
+          <div class="caption">Sunset Cruise</div>
+        </div>
+        
+        <div class="slide">
+          <img src="assets/pedro-11.jpg" alt="Sunset Cruise">
+          <div class="caption">Sunset Cruise</div>
+        </div>
+        
+        <div class="slide">
+          <img src="assets/pedro-12.jpg" alt="Sunset Ufenau">
+          <div class="caption">Sunset Ufenau</div>
+        </div>
+        
+        <div class="slide">
+          <img src="assets/pedro-13.jpg" alt="Kabine">
+          <div class="caption">Kabine</div>
+        </div>  
+
+        <div class="slide">
+          <img src="assets/pedro-14.jpg" alt="Zur Bugkabine">
+          <div class="caption">Kabine</div>
+        </div>  
+
+        <div class="slide">
+          <img src="assets/pedro-15.jpg" alt="WC Kabine">
+          <div class="caption">WC Kabine</div>
+        </div>  
+        
+        <div class="slide">
+          <img src="assets/pedro-16.jpg" alt="Bootshalle">
+          <div class="caption">Bootshalle</div>
+        </div>  
+        
+        <div class="slide">
+          <img src="assets/pedro-17.jpg" alt="Bootsplatz mit automatischem Lift">
+          <div class="caption">Bootsplatz mit automatischem Lift</div>
+        </div>  
+        
+        <div class="slide">
+          <img src="assets/pedro-18.jpg" alt="Boot absenken - einsteigen - losfahren">
+          <div class="caption">Boot absenken - einsteigen - losfahren</div>
+        </div>  
+        
+        <div class="slide">
+          <img src="assets/pedro-19.jpg" alt="Ausfahrt Bootshalle">
+          <div class="caption">Ausfahrt Bootshalle</div>
+        </div>  
+        
+      </div>
+
+      <div class="dots" id="dots"></div>
+
+      <div class="controls">
+        <button class="btn" onclick="prev()">‹</button>
+        <button class="btn" onclick="next()">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section id="videos">
+  <h2>Videos</h2>
+
+  <div class="grid">
+
+    <!-- VIDEO 1 -->
+    <div>
+      <video controls>
+        <source src="assets/clip-01.mp4" type="video/mp4">
+      </video>
+      <p class="video-caption">Am Bürkliplatz</p>
+    </div>
+
+    <!-- VIDEO 2 -->
+    <div>
+      <video controls>
+        <source src="assets/clip-02.mp4" type="video/mp4">
+      </video>
+      <p class="video-caption">Sunrise Ufenau</p>
+    </div>
+
+    <!-- VIDEO 3 -->
+    <div>
+      <video controls>
+        <source src="assets/clip-03.mp4" type="video/mp4">
+      </video>
+      <p class="video-caption">Hafenausfahrt in der Morgendämmerung</p>
+    </div>
+
+  </div>
+</section>
+
+
+</div>
+
+<footer>
+  © <span id="year"></span> Pedro 850
+</footer>
+
+<script>
+  const track = document.getElementById("track");
+  const slides = track.querySelectorAll(".slide");
+  const dotsWrap = document.getElementById("dots");
+
+  let index = 0;
+
+  function show(){
+    track.style.transform = `translateX(${-index * 100}%)`;
+    updateDots();
+  }
+
+  function next(){
+    stopAuto();
+    index = (index + 1) % slides.length;
+    show();
+    startAuto();
+  }
+
+  function prev(){
+    stopAuto();
+    index = (index - 1 + slides.length) % slides.length;
+    show();
+    startAuto();
+  }
+
+  window.next = next;
+  window.prev = prev;
+
+  /* ---------- DOTS ---------- */
+  function createDots(){
+    dotsWrap.innerHTML = "";
+    slides.forEach((_, i) => {
+      const d = document.createElement("div");
+      d.className = "dot";
+      d.addEventListener("click", () => {
+        stopAuto();
+        index = i;
+        show();
+        startAuto();
+      });
+      dotsWrap.appendChild(d);
+    });
+  }
+
+  function updateDots(){
+    const dots = dotsWrap.querySelectorAll(".dot");
+    dots.forEach((d,i) => {
+      d.classList.toggle("active", i === index);
+    });
+  }
+
+  /* ---------- AUTO SCROLL ---------- */
+  const AUTO_MS = 4500;
+  let timer = null;
+
+  function startAuto(){
+    if (timer || slides.length <= 1) return;
+    timer = setInterval(() => {
+      index = (index + 1) % slides.length;
+      show();
+    }, AUTO_MS);
+  }
+
+  function stopAuto(){
+    clearInterval(timer);
+    timer = null;
+  }
+
+  const carousel = document.querySelector(".carousel");
+  carousel.addEventListener("mouseenter", stopAuto);
+  carousel.addEventListener("mouseleave", startAuto);
+  carousel.addEventListener("touchstart", stopAuto, {passive:true});
+  carousel.addEventListener("touchend", startAuto, {passive:true});
+
+  /* ---------- INIT ---------- */
+  createDots();
+  show();
+  startAuto();
+</script>
+
+
+
+
+</body>
+</html>
