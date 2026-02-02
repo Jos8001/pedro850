@@ -110,23 +110,18 @@
     }
 
 
-    .controls {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 10px;
+    .controls{
+      position:absolute;
+      inset:0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0 10px;
+      pointer-events:none;   /* overlay blockt nichts */
     }
-
-    .btn {
-      background: rgba(0,0,0,.5);
-      border: 1px solid var(--border);
-      color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
+    
+    .btn{
+      pointer-events:auto;   /* nur Buttons klickbar */
     }
 
     video, iframe {
