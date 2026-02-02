@@ -121,8 +121,16 @@
     }
     
     .btn{
-      pointer-events:auto;   /* nur Buttons klickbar */
+      pointer-events:auto;
+      background: rgba(0,0,0,.5);
+      border: 1px solid var(--border);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
     }
+
 
     video, iframe {
       width: 100%;
@@ -190,7 +198,11 @@
       background: rgba(255,255,255,.35);
       cursor:pointer;
       transition: transform .2s ease, background .2s ease;
+
+      padding: 10px;              /* größere Touch-Fläche */
+      background-clip: content-box;
     }
+
 
     .dot.active{
       background: white;
