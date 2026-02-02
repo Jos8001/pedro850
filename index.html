@@ -93,6 +93,9 @@
     .slide {
       min-width: 100%;
       aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .slide img {
@@ -135,10 +138,11 @@
     }
 
     .caption {
-      margin-top: 8px;
+      margin-top: 10px;
       text-align: center;
-      font-size: 14px;
-      color: #fff;
+      font-size: 15px;
+      color: #ffffff;
+      font-weight: 500;
     }
 
     .title-row{
@@ -363,7 +367,7 @@
       <video controls>
         <source src="assets/clip-01.mp4" type="video/mp4">
       </video>
-      <p>Am Bürkliplatz</p>
+      <p class="video-caption">Am Bürkliplatz</p>
     </div>
 
     <!-- VIDEO 2 -->
@@ -371,7 +375,7 @@
       <video controls>
         <source src="assets/clip-02.mp4" type="video/mp4">
       </video>
-      <p>Sunrise Ufenau</p>
+      <p class="video-caption">Sunrise Ufenau</p>
     </div>
 
     <!-- VIDEO 3 -->
@@ -379,7 +383,7 @@
       <video controls>
         <source src="assets/clip-03.mp4" type="video/mp4">
       </video>
-      <p>Hafenausfahrt in der Morgendämmerung</p>
+      <p class="video-caption">Hafenausfahrt in der Morgendämmerung</p>
     </div>
 
   </div>
