@@ -153,14 +153,13 @@
       font-size: 14px;
     }
 
-    .caption {
-      margin: 12px 0 8px;
+    .img-caption{
+      margin: 12px 0 0;
       text-align: center;
       font-size: 15px;
       color: #fff;
       font-weight: 500;
     }
-
 
     .title-row{
       display:flex;
@@ -270,99 +269,80 @@
      <div class="viewport"> 
       <div class="track" id="track">
         
-        <div class="slide">
+        <div class="slide" data-caption="Hafenanlage">
           <img src="assets/pedro-01.jpg" alt="Hafenanlage">
-          <div class="caption">Hafenanlage</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Am Bürkliplatz">
           <img src="assets/pedro-02.jpg" alt="Am Bürkliplatz">
-          <div class="caption">Am Bürkliplatz</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Vor Anker im Zürichhorn">
           <img src="assets/pedro-03.jpg" alt="Vor Anker im Zürichhorn">
-          <div class="caption">Vor Anker im Zürichhorn</div>
         </div>  
         
-        <div class="slide">
+        <div class="slide" data-caption="Captain's View">
           <img src="assets/pedro-04.jpg" alt="Captain's View">
-          <div class="caption">Captain's View</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Blue Magic">
           <img src="assets/pedro-05.jpg" alt="Blue Magic">
-          <div class="caption">Blue Magic</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Sunrise Ufenau">
           <img src="assets/pedro-06.jpg" alt="Sunrise Ufenau">
-          <div class="caption">Sunrise Ufenau</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Sunrise Ufenau">
           <img src="assets/pedro-07.jpg" alt="Sunrise Ufenau">
-          <div class="caption">Sunrise Ufenau</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Sunrise Ufenau">
           <img src="assets/pedro-08.jpg" alt="Sunrise Ufenau">
-          <div class="caption">Sunrise Ufenau</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Relax">
           <img src="assets/pedro-09.jpg" alt="Relax">
-          <div class="caption">Relax</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Sunset Cruise">
           <img src="assets/pedro-10.jpg" alt="Sunset Cruise">
-          <div class="caption">Sunset Cruise</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Sunset Cruise">
           <img src="assets/pedro-11.jpg" alt="Sunset Cruise">
-          <div class="caption">Sunset Cruise</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Sunset Ufenau">
           <img src="assets/pedro-12.jpg" alt="Sunset Ufenau">
-          <div class="caption">Sunset Ufenau</div>
         </div>
         
-        <div class="slide">
+        <div class="slide" data-caption="Kabine">
           <img src="assets/pedro-13.jpg" alt="Kabine">
-          <div class="caption">Kabine</div>
         </div>  
 
-        <div class="slide">
+        <div class="slide" data-caption="Zur Bugkabine">
           <img src="assets/pedro-14.jpg" alt="Zur Bugkabine">
-          <div class="caption">Kabine</div>
         </div>  
 
-        <div class="slide">
+        <div class="slide" data-caption="WC Kabine">
           <img src="assets/pedro-15.jpg" alt="WC Kabine">
-          <div class="caption">WC Kabine</div>
         </div>  
         
-        <div class="slide">
+        <div class="slide" data-caption="Bootshalle">
           <img src="assets/pedro-16.jpg" alt="Bootshalle">
-          <div class="caption">Bootshalle</div>
         </div>  
         
-        <div class="slide">
+        <div class="slide" data-caption="Bootsplatz mit automatischem Lift">
           <img src="assets/pedro-17.jpg" alt="Bootsplatz mit automatischem Lift">
-          <div class="caption">Bootsplatz mit automatischem Lift</div>
         </div>  
         
-        <div class="slide">
+        <div class="slide" data-caption="Boot absenken - einsteigen - losfahren">
           <img src="assets/pedro-18.jpg" alt="Boot absenken - einsteigen - losfahren">
-          <div class="caption">Boot absenken - einsteigen - losfahren</div>
         </div>  
         
-        <div class="slide">
+        <div class="slide" data-caption="Ausfahrt Bootshalle">
           <img src="assets/pedro-19.jpg" alt="Ausfahrt Bootshalle">
-          <div class="caption">Ausfahrt Bootshalle</div>
         </div>  
         
        </div> 
@@ -371,8 +351,10 @@
         <button class="btn" onclick="prev()">‹</button>
         <button class="btn" onclick="next()">›</button>
        </div>
-       
+      
       </div>
+
+      <div class="img-caption" id="imgCaption"></div>
       
     </div>
         
@@ -421,11 +403,17 @@
 <script>
   const track = document.getElementById("track");
   const slides = track.querySelectorAll(".slide");
+  const captionEl = document.getElementById("imgCaption");
 
   let index = 0;
 
   function show(){
     track.style.transform = `translateX(${-index * 100}%)`;
+    const cap =
+      slides[index].getAttribute("data-caption") ||
+      slides[index].querySelector("img")?.alt ||
+      "";
+    captionEl.textContent = cap;
   }
 
   function next(){
