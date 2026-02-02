@@ -405,7 +405,7 @@
 
 <script>
   const track = document.getElementById("track");
-  const slides = track.querySelectorAll(".slide"); // <-- zählt alle Slides
+  const slides = track.querySelectorAll(".slide");
   let index = 0;
 
   function show() {
@@ -413,20 +413,73 @@
   }
 
   function next() {
-    index = (index + 1) % slides.length; // <-- statt % 3
+    index = (index + 1) % slides.length;
     show();
   }
 
   function prev() {
-    index = (index - 1 + slides.length) % slides.length; // <-- statt +2 % 3
+    index = (index - 1 + slides.length) % slides.length;
     show();
   }
 
-  document.getElementById("year").textContent = new Date().getFullYear();
+  // Buttons (falls du sie im HTML über onclick nutzt, kannst du das lassen;
+  // ansonsten kannst du hier Buttons per addEventListener binden.)
+  window.next = next;
+  window.prev = prev;
 
-  // optional: direkt erstes Bild anzeigen
+  // --- AUTO-PLAY ---
+  const AUTO_MS = 4500; // <- Tempo hier anpassen (z.B. 3000 schneller / 7000 langsamer)
+  let timer = null;
+  let isPaused = false;
+
+  function startAuto() {
+    if (timer || isPaused || slides.length <= 1) return;
+    timer = setInterval(next, AUTO_MS);
+  }
+
+  function stopAuto() {
+    if (!timer) return;
+    clearInterval(timer);
+    timer = null;
+  }
+
+  function pauseAuto() {
+    isPaused = true;
+    stopAuto();
+  }
+
+  function resumeAuto() {
+    isPaused = false;
+    startAuto();
+  }
+
+  // Pause bei Hover (Desktop)
+  const carousel = document.querySelector(".carousel");
+  if (carousel) {
+    carousel.addEventListener("mouseenter", pauseAuto);
+    carousel.addEventListener("mouseleave", resumeAuto);
+
+    // Pause bei Touch (iPhone/Android)
+    carousel.addEventListener("touchstart", pauseAuto, { passive: true });
+    carousel.addEventListener("touchend", resumeAuto, { passive: true });
+    carousel.addEventListener("touchcancel", resumeAuto, { passive: true });
+  }
+
+  // Pause wenn Tab/Screen nicht aktiv
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stopAuto();
+    else startAuto();
+  });
+
+  // Initial
   show();
+  startAuto();
+
+  // Footer Jahr (falls du es hast)
+  const y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
 </script>
+
 
 
 </body>
